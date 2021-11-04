@@ -51,3 +51,5 @@ ENV PATH="/opt/oracle/instantclient_21_3:${PATH}"
 
 # Run as "oracle"
 USER oracle
+
+ENTRYPOINT [ "sqlplus" ]

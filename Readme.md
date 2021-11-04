@@ -7,11 +7,17 @@ My own image to test oracle db connectivity.
 
 Interactive:
 ```
-docker run --rm -it klo2k/sqlplus:development
+docker run --rm -it --entrypoint=/bin/bash klo2k/sqlplus
 sqlplus system/oracle@oracle.database.fqdn/service_name
 ```
 
 Scripted:
 ```
-docker run --rm klo2k/sqlplus:development bash -c 'echo "select user from dual;"|sqlplus -L -S system/oracle@oracle.database.fqdn/service_name'
+# Via stdin
+echo 'select user from dual;'|docker run --rm -i klo2k/sqlplus system/oracle@oracle.database.fqdn/service_name
+
+# As "file"
+docker run --rm -i klo2k/sqlplus system/oracle@oracle.database.fqdn/service_name <<EOT
+select user from dual;
+EOT
 ````
